@@ -1,0 +1,18 @@
+{% extends 'layouts/base.twig' %}
+
+{% block headers %}
+    <link rel="stylesheet" href="/css/admin/style.css">
+    <script src="/js/admin/main.js" defer></script>
+{% endblock %}
+
+{% block nav %}
+    <div id="nav">
+        <div class="nav-inner">
+            <a><div class="nav-inner-element"><i class="fa fa-home"></i> Dashboard</div></a>
+            <a href="{{ route({'name':'admin-users-index'}) }}" class="nav-inner-link"><div class="nav-inner-element"><i class="fa fa-users"></i> Users</div></a>
+            <a href="{{ route({'name':'admin-categories-index'}) }}" class="nav-inner-link"><div class="nav-inner-element"><i class="fa fa-th-large"></i> Categories</div></a>
+            <a href="{{ route({'name':'admin-products-index'}) }}" class="nav-inner-link"><div class="nav-inner-element" onclick="showProductItems();"><i class="fa fa-th"></i> Products</div></a>
+            <a href="{{ route({'name':'admin-orders-index'}) }}" class="nav-inner-link"><div class="nav-inner-element"><i class="fa fa-list"></i> Orders</div></a>
+        </div>
+    </div>
+{% endblock %}

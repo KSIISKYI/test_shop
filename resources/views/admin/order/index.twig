@@ -1,0 +1,32 @@
+{% extends 'admin/index.twig' %}
+
+{% block headers %}
+    {{ parent() }}
+    <script src="/js/admin/order/index.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="main-content" class="container allContent-section py-4">
+        <div>
+            <div style="display: flex; align-items: center; margin-bottom: 20px">
+                <h2 style="margin-right:20px;">Orders</h2>
+                <button type="button" class="btn btn-secondary" style="height:40px; width: auto;" onclick="toOrderCreationForm()"> 
+                    <i class="fa-solid fa-plus"></i>
+                    Add Order
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">User ID</th>
+                        <th class="text-center">Total</th>
+                        <th class="text-center">Create At</th>
+                        <th class="text-center" colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

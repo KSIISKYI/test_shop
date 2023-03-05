@@ -1,0 +1,107 @@
+{% extends 'admin/index.twig' %}
+
+{% block content %}
+    <div class="form">
+		<center><h1>Create New Product</h1></center>
+
+        <form method="POST" action="{{ route({'name': 'products-store'}) }}" enctype="multipart/form-data">
+		    <div class="form_grid">
+                <div class="form_option">
+                    <label><b>Product Name</b></label>
+		            <input type="text" placeholder="Enter Product Name" name="name" value="{{ data.0.name }}"
+					{% if errors.0.name %}
+                        style="background-color: #ffdada; border: 2px solid red;">
+                        <div class="form_option_error">
+                            {% for error in errors.0.name %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    >
+                    {% endif %} 
+                </div>
+                <div class="form_option">
+                    <label><b>Product Images</b></label>
+                    <input type="file" name="product_imgs[]" accept="image/*" multiple="multiple">
+                </div>
+                <div class="form_option">
+                    <label><b>Categiries</b></label>
+                    <select class="field_select" name="category_id"
+                    {% if errors.0.category_id %}
+                        style="background-color: #ffdada; border: 2px solid red;">
+                    {% else %}
+                    >
+                    {% endif %} 
+                        <option value="">Not selected</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" 
+                            {% if data.0.category_id == category.id %} selected {% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {% if errors.0.category_id %}
+                        <div class="form_option_error">
+                            {% for error in errors.0.category_id %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %} 
+                </div>
+                <div class="form_option">
+                    <label><b>Description</b></label>
+                    <textarea name="description" rows="7">{{ data.0.description }}</textarea>
+                </div>
+                <div class="form_option">
+                    <label><b>Guest Price</b></label>
+                    <input type="number" name="guest_price" min="1" value="{{ data.0.guest_price }}"
+                    {% if errors.0.guest_price %}
+                        style="background-color: #ffdada; border: 2px solid red;">
+                        <div class="form_option_error">
+                            {% for error in errors.0.guest_price %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    >
+                    {% endif %} 
+                </div>
+                <div class="form_option">
+                    <label><b>Price</b></label>
+                    <input type="number" name="price" min="1" value="{{ data.0.price }}"
+                    {% if errors.0.price %}
+                        style="background-color: #ffdada; border: 2px solid red;">
+                        <div class="form_option_error">
+                            {% for error in errors.0.price %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    >
+                    {% endif %}
+                </div>
+                <div class="form_option">
+                    <label><b>For Authorized</b></label>
+                    <input type="checkbox" name="for_authorized">
+                </div>
+                <div class="form_option">
+                    <label><b>Quantity In Stock</b></label>
+                    <input type="number" name="quantity_in_stock" min="1" value="{{ data.0.quantity_in_stock }}"
+                    {% if errors.0.quantity_in_stock %}
+                        style="background-color: #ffdada; border: 2px solid red;">
+                        <div class="form_option_error">
+                            {% for error in errors.0.quantity_in_stock %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    >
+                    {% endif %}
+                </div>
+                <div class="form_option">
+    		        <button type="submit" style="font-size: 17px; font-weight: bold;">Create</button>
+    		    </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

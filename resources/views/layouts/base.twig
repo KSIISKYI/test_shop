@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>TEST SHOP</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+	{# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> #}
+
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="https://kit.fontawesome.com/600e38d2f0.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/main.js" defer></script>
+
+    {% block headers %}
+    {% endblock %}
+</head>
+<body>
+	<div class="page">
+
+		<div id="header">
+			<div class="logo">TEST SHOP</div>
+			<div class="header-inner">
+				<div class="header-inner-auth">
+                    {% if getUser() %}
+                        <a href="#"><p>{{ getUser().username }}</p></a>
+                        <p>|</p>
+                        <a href="{{ route({'name':'signout'}) }}"><p>Logout</p></a>
+                    {% else %}
+                        <a href="{{ route({'name':'signin'}) }}"><p>Sign In</p></a>
+                        <p>|</p>
+                        <a href="{{ route({'name':'signup'}) }}"><p>Sign Up</p></a>
+                    {% endif %}
+				</div>
+				<div class="cart-demo">
+					<i class="fa-solid fa-cart-shopping"></i>
+					<div class="amount">2</div>
+				</div>
+			</div>
+		</div>
+        {% block nav %}
+            <div id="nav">
+                <div class="nav-inner">
+                    <div class="nav-inner-element">All</div>
+                    <div class="nav-inner-element">category1</div>
+                    <div class="nav-inner-element">category2</div>
+                    <div class="nav-inner-element">category3</div>
+                </div>
+            </div>
+        {% endblock %}
+
+		<div id="content">
+			<div class="content-inner">
+                    {% block content %}
+                    {% endblock %}
+			</div>
+		</div>
+		<div id="footer">wewew</div>
+	</div>
+	
+</body>
+</html>

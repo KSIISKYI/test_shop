@@ -1,0 +1,31 @@
+{% extends 'admin/index.twig' %}
+
+{% block content %}
+    <div class="form" method="POST">
+		<center><h1>Edit Category</h1></center>
+
+		<form method="POST" action="{{ route({'name': 'categories-update', 'category_id': category.id}) }}">
+		    <div class="form_grid">
+			    <div class="form_option">
+			        <label for="email"><b>Category Name</b></label>
+			        <input type="text" placeholder="Enter Category Name" name="name" required=""
+					{% if errors.0 %}
+						value="{{ data.0.name }}"
+                        style="background-color: #ffdada; border: 2px solid red;">
+                        <div class="form_option_error">
+                            {% for error in errors.0.name %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+					value="{{ category.name }}">
+                    {% endif %} 
+			    </div>
+			</div>
+
+			<div class="form_option">
+			    <button type="submit" style="font-size: 17px; font-weight: bold;">Update</button>
+			</div>
+	    </form>
+    </div>
+{% endblock %}

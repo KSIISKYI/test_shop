@@ -6,11 +6,12 @@ abstract class Controller
 {
     protected $request;
     protected $view;
-    protected $service;
+    protected $flash;
 
     function __construct($request)
     {
         $this->request = $request;
         $this->view = new View;
+        $this->flash = new Flash;
     }
 }
