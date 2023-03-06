@@ -43,7 +43,7 @@ composer install
 ```
 4. Rename .env.example to .env:
 ```
-mv .env.example to .env
+mv .env.example .env
 ```
 5. Set credentials for db
 6. Make migrations:
@@ -58,6 +58,7 @@ php -S localhost:8000 -t public
 
 ###### Admin
 ```
+url: /admin/signin
 username: admin@gmail.com
 password: Zxcvbnm2
 ```
