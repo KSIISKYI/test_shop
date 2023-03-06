@@ -3,26 +3,48 @@
 namespace App\Controllers;
 
 use App\Core\{Controller, Paginator};
-use App\Models\Product;
 use App\Services\{ProductService, CategoryService};
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = ProductService::getProducts();
+        $products = ProductService::getProducts($this->request);
         $page_number = isset($this->request->data['page']) ? $this->request->data['page'] : 1;
-        $pgn = new Paginator($products, 10);
+        $pgn = new Paginator($products, 9);
 
         if (isset($this->request->server['CONTENT_TYPE']) &&  $this->request->server['CONTENT_TYPE'] == 'application/json') {
             header('Content-type: application/json');
             print_r(json_encode($pgn->getData($page_number)));
+            exit();
         }
     }
 
     public function indexForAdmin()
     {
         return $this->view->render('admin/product/index.twig');
+    }
+
+    public function filterByCategory()
+    {
+        $products = ProductService::getProducts($this->request, ['category_id' => $this->request->matches['category_id']]);
+        $page_number = isset($this->request->data['page']) ? $this->request->data['page'] : 1;
+        $pgn = new Paginator($products, 9);
+
+        if (isset($this->request->server['CONTENT_TYPE']) &&  $this->request->server['CONTENT_TYPE'] == 'application/json') {
+            header('Content-type: application/json');
+            print_r(json_encode($pgn->getData($page_number)));
+            exit();
+        }
+
+        return $this->view->render('home.twig');
+    }
+
+    public function show()
+    {
+        $product = ProductService::getProduct($this->request->matches['product_id']);
+
+        return $this->view->render('product/show.twig', compact('product'));
     }
 
     public function create()

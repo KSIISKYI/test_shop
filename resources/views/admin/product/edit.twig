@@ -100,7 +100,11 @@
                 </div>
                 <div class="form_option">
                     <label><b>For Authorized</b></label>
-                    <input type="checkbox" name="for_authorized">
+                    <input type="checkbox" name="for_authorized" value="1"
+                    {% if product.for_authorized %}
+                        checked
+                    {% endif %}
+                    >
                 </div>
                 <div class="form_option">
                     <label><b>Quantity In Stock</b></label>

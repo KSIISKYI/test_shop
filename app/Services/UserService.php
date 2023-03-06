@@ -69,6 +69,17 @@ class UserService
         return $user_model->filter();
     }
 
+    static public function getMyUser()
+    {
+        $user_model = new User;
+        
+        if (!isset($_SESSION['user_id']) || !$user = $user_model->get('id', $_SESSION['user_id'])) {
+            return [];
+        }
+
+        return $user;
+    }
+
     static public function removeUser(Request $request)
     {
         $user_model = new User;

@@ -25,10 +25,12 @@ class ProductImageService
     static public function saveProfileImgs(array $product, array $files)
     {
         for($i = 0; $i < count($files['product_imgs']['tmp_name']); $i++) {
-            $product_img_name = self::generateProductName($product, $i + 1);
-            self::createProductImg($product['id'], $product_img_name);
+            if ($files['product_imgs']['tmp_name'][$i]) {
+                $product_img_name = self::generateProductName($product, $i + 1);
+                self::createProductImg($product['id'], $product_img_name);
 
-            move_uploaded_file($files['product_imgs']['tmp_name'][$i], 'img/product_images/' . $product_img_name);
+                move_uploaded_file($files['product_imgs']['tmp_name'][$i], 'img/product_images/' . $product_img_name);
+            } 
         }
     }
 }

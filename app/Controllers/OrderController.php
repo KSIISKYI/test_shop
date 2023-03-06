@@ -29,7 +29,7 @@ class OrderController extends Controller
     {
         $shipper_model = new Shipper;
         $shippers = $shipper_model->filter();
-        $products = ProductService::getProducts();
+        $products = ProductService::getProducts($this->request);
 
         return $this->view->render('admin/order/create.twig', compact('products', 'shippers'));
     }
@@ -44,7 +44,7 @@ class OrderController extends Controller
         $shipper_model = new Shipper;
         $order_model = new Order;
         $shippers = $shipper_model->filter();
-        $products = ProductService::getProducts();
+        $products = ProductService::getProducts($this->request);
         $order = $order_model->get('id', $this->request->matches['order_id']);
 
         if (isset($this->request->server['CONTENT_TYPE']) &&  $this->request->server['CONTENT_TYPE'] == 'application/json') {

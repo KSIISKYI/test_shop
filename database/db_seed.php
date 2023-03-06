@@ -121,7 +121,79 @@ $dbh->query("INSERT INTO {$_ENV['DATABASE']}.users(username, email, is_admin, pa
 $dbh->query("INSERT INTO {$_ENV['DATABASE']}.products(name, category_id, description, guest_price, price, for_authorized, quantity_in_stock)
     VALUES
         (
+            'Laptop Acer Aspire 1 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            30499,
+            29499,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 2 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            30599,
+            29599,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 3 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            30699,
+            29699,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 4 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            30799,
+            29799,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 5 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            30899,
+            29899,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 6 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            31999,
+            29999,
+            0,
+            12
+        ),
+        (
             'Laptop Acer Aspire 7 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            31599,
+            29999,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 8 A715-42G-R3EZ', 
+            1, 
+            'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
+            31899,
+            29999,
+            0,
+            12
+        ),
+        (
+            'Laptop Acer Aspire 9 A715-42G-R3EZ', 
             1, 
             'Screen 15.6\" IPS (1920x1080) Full HD, matte / AMD Ryzen 5 5500U (2.1 - 4.0 GHz) / RAM 16 GB / SSD 512 GB / nVidia GeForce GTX 1650, 4 GB / without OD / LAN / Wi-Fi / Bluetooth / web camera / without OS / 2.15 kg / black',
             30999,

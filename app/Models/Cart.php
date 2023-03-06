@@ -9,9 +9,10 @@ class Cart extends Models
 
     function get($field, $value, $table = null) {
         $data = parent::get($field, $value);
-        // $data['user'] = parent::get('id', $data['user_id'], 'users');
-        $data['cart_items'] = parent::filter(['cart_id' => $data['id']], 'cart_items');
-
+        if ($data) {
+            $data['cart_items'] = parent::filter(['cart_id' => $data['id']], 'cart_items');
+        }
+    
         return $data;
     }
 
@@ -19,7 +20,6 @@ class Cart extends Models
         $data = parent::filter($filers);
 
         foreach($data as $key => $item) {
-            // $data[$key]['user'] = parent::get('id', $item['user_id'], 'users');
             $data[$key]['cart_items'] = parent::filter(['cart_id' => $item['id']], 'cart_items');
         }
 

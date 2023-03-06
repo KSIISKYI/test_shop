@@ -10,6 +10,16 @@ class InitCartMiddleware extends Middleware
     function handle(Request $request)
     {
         $cart_model = new Cart;
-        $new_cart = $cart_model->create([]);
+        if (!isset($_SESSION['cart_id']) || !$cart = $cart_model->get('id', $_SESSION['cart_id'])) {
+            $cart = $cart_model->create([]);
+            $request->cart = $cart;
+
+        } else {
+            $request->cart = $cart;
+        }
+
+        $_SESSION['cart_id'] = $cart['id'];
+
+        return $request;
     }
 }

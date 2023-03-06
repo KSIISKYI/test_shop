@@ -54,7 +54,7 @@ function addOrderItem(product_id, product_name, product_price, product_quantity,
         checkCountOrderItems();
     }
 
-    add_table_row(['', product_name, product_price, product_quantity, delete_btn]);
+    addTableRow(['', product_name, product_price, product_quantity, delete_btn]);
 
     total = parseInt(total, 10) + parseInt(product_quantity, 10) * parseInt(product_price, 10);
     total_element.value = total + ' ₴';

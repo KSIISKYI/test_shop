@@ -11,7 +11,7 @@ class AuthenticateMiddleware extends Middleware
     {
         $user_model = new User;
 
-        if (!isset($_SESSION['user_id']) || !$user = $user_model->get('id',$_SESSION['user_id'])) {
+        if (!isset($_SESSION['user_id']) || !$user = $user_model->get('id', $_SESSION['user_id'])) {
             return $this->raise_httm_error(401, 'Not Unauthorized');
         }
 

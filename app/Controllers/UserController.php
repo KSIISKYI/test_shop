@@ -9,9 +9,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $products = UserService::getUsers();
+        $users = UserService::getUsers();
         $page_number = isset($this->request->data['page']) ? $this->request->data['page'] : 1;
-        $pgn = new Paginator($products, 10);
+        $pgn = new Paginator($users, 10);
 
         if (isset($this->request->server['CONTENT_TYPE']) &&  $this->request->server['CONTENT_TYPE'] == 'application/json') {
             header('Content-type: application/json');
@@ -22,6 +22,16 @@ class UserController extends Controller
     public function indexForAdmin()
     {
         return $this->view->render('admin/user/index.twig');
+    }
+
+    public function getMyUser()
+    {
+        $user = UserService::getMyUser();
+
+        if (isset($this->request->server['CONTENT_TYPE']) &&  $this->request->server['CONTENT_TYPE'] == 'application/json') {
+            header('Content-type: application/json');
+            print_r(json_encode($user));
+        }
     }
 
     public function create()

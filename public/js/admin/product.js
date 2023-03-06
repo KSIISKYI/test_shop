@@ -1,18 +1,9 @@
 let tbody = document.querySelector('tbody');
-let current_page_number = 1;
 let current_show_function = showProductItems;
+let lazyLoadFunction;
 
-async function showProductItems()
+async function showProductItems(data)
 {
-    let response = await fetch('http://localhost:8000/products?page=' + current_page_number, {
-		method: 'GET',
-		headers: {
-			"Content-Type": "application/json",
-		}
-	});
-
-    let data = await response.json();
-
     for(let item of data) {
         let product_img_href = item.product_images.length > 0 ? item.product_images[0].path : 'def_product_img.jpeg';
         let product_image = htmlToElement(`
@@ -22,7 +13,7 @@ async function showProductItems()
         `)
         let product_link = document.createElement('a');
         product_link.innerHTML = item['name'];
-        product_link.href = '/admin/products/' + item['id'];
+        product_link.href = '/products/' + item['id'];
 
         let edit_btn = htmlToElement(`<button class="btn btn-primary" style="height:40px">Edit</button>`);
         let delete_btn = htmlToElement(`<button class="btn btn-danger" style="height:40px">Delete</button>`);
@@ -35,7 +26,7 @@ async function showProductItems()
             location.replace(`/products/${item['id']}/edit`);
         };
         
-        add_table_row([
+        addTableRow([
             item['id'],
             product_image,
             product_link,
@@ -46,8 +37,6 @@ async function showProductItems()
             delete_btn
         ])
     }
-
-	current_page_number++;
 }
 
 function toProductCreationForm()
@@ -57,7 +46,9 @@ function toProductCreationForm()
 
 async function run()
 {
-    showProductItems();
+    lazyLoadFunction = await lazyLoad('/products');
+
+    lazyLoadFunction();
 }
 
 run();

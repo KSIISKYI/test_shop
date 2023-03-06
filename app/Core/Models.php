@@ -23,7 +23,7 @@ abstract class Models
         } else {
             $pr = $this->db->prepare('SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = ?');
         }
-
+        
         $pr->execute([$value]);
         $data = $pr->fetch(PDO::FETCH_ASSOC);
 
@@ -54,22 +54,27 @@ abstract class Models
     //create record with array $data
     function create(array $data)
     {
-        $query = 'INSERT INTO ' . $this->table . ' (';
-        foreach(array_keys($data) as $key) {
-            $query .= $key . ', ';
-        }
-        $query = substr($query, 0, -2);
-        $query .= ') VALUES (';
+        $query = "INSERT INTO $this->table(__fields__) VALUES(__values__)";
+        $keys = '';
+	    $values = '';
+	
+        foreach($data as $key => $value) {
+            $keys .= $key . ', ';
 
-        foreach($data as $value) {
             if (gettype($value) == 'string') $value = "'$value'";
-            $query .= $value . ', ';
+            $values .= $value . ', ';
         }
-        $query = substr($query, 0, -2);
-        $query .= ')';
+
+        if ($keys) {
+            $keys = substr($keys, 0, -2);
+            $values = substr($values, 0, -2);
+        }
+
+        $query = str_replace("__fields__", $keys, $query);
+	    $query = str_replace("__values__", $values, $query);
 
         $this->db->query($query);
-
+        
         return $this->get('id', $this->raw('SELECT LAST_INSERT_ID() as last_id;')['last_id']);
     }
 

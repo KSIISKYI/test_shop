@@ -1,18 +1,9 @@
 let tbody = document.querySelector('tbody');
-let current_page_number = 1;
 let current_show_function = showUserItems;
+let lazyLoadFunction;
 
-async function showUserItems()
+async function showUserItems(data)
 {
-    let response = await fetch('/categories?page=' + current_page_number, {
-		method: 'GET',
-		headers: {
-			"Content-Type": "application/json",
-		}
-	});
-
-    let data = await response.json();
-
     for(let item of data) {
 
         let category_link = document.createElement('a');
@@ -30,15 +21,13 @@ async function showUserItems()
             deleteElement('categories', item['id'], this);
         };
         
-        add_table_row([
+        addTableRow([
             item['id'],
             category_link,
             edit_btn,
             delete_btn
         ])
     }
-
-	current_page_number++;
 }
 
 function toCategoryCreationForm()
@@ -48,7 +37,9 @@ function toCategoryCreationForm()
 
 async function run()
 {
-    showUserItems();
+    lazyLoadFunction = await lazyLoad('/categories');
+
+    lazyLoadFunction();
 }
 
 run();

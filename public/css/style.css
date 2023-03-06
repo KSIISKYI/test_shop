@@ -19,7 +19,7 @@ a {
 
 .page {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1400px;
   min-height: 100vh;
   display: grid;
   grid-template-areas: 
@@ -293,6 +293,67 @@ img {
   height: auto;
 }
 
+.product-price {
+  color: #c90300;
+  font-size: 30px;
+}
+
+.add_cart_block {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: 1fr;
+  width: 50%;
+  grid-gap: 20px;
+  align-items: center;
+}
+
+.slider {
+  width: 600px;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.slider-line {
+  position: relative;
+  display: flex;
+  height: auto;
+  width: 600px;
+  left: 0;
+  transition: all ease 0.7s;
+}
+
+.slider-line img {
+  width: 100%;
+  height: auto;
+}
+
+.slider-pointer {
+  width: 100px;
+  height: 2px;
+  background-color: #ccc;
+  border-radius: 5px;
+  position: relative;
+  top: -3px;
+  left: 0;
+  transition: all ease 0.7s;
+}
+
+#slider-next, #slider-prev {
+  position: absolute;
+  cursor: pointer;
+  color: white;
+  font-size: 35px;
+  opacity: 0.5;
+  padding: 10px;
+  text-shadow: black 0px 0px 15px;
+}
+
+#slider-next:hover, #slider-prev:hover {
+  opacity: 1;
+}
+
 
 
 
@@ -301,7 +362,7 @@ img {
   grid-area: footer;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
  .page {
       grid-template-areas: 
           "header"
