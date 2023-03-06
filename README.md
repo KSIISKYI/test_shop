@@ -1,5 +1,11 @@
 ### This project was developed as a test task by EnjoyDevelop company
 
+<img src="screenshots/1.png">
+
+<img src="screenshots/2.png">
+
+<img src="screenshots/3.png">
+
 ## Used technologies:
 
 :point_right: native PHP8, JS
