@@ -1,0 +1,82 @@
+{% extends 'layouts/base.twig' %}
+
+{% block headers %}
+    <script src="/js/slider.js" defer></script>
+    <script src="/js/product/show.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="form" style="width: 80%; border: none;">
+        <div class="form_grid">
+            <div class="form_option" style="text-align: center;">
+                <h1>{{ product.name }}</h1>
+            </div>
+
+            <div class="form_option">
+                <div class="slider" style="margin: 0 auto">
+                    {% if product.product_images %}
+                        <div class="slider-line">
+                            {% for product_image in product.product_images %}
+                                <img src="/img/product_images/{{ product_image.path }}" value="{{ product_image.id }}">
+                            {% endfor %}
+                        </div>
+                        {% if product.product_images.1 %}
+                            <i class="fa-solid fa-angle-left" id="slider-prev" style="top: 47%;"></i>
+                            <i class="fa-solid fa-angle-right" id="slider-next" style="top: 47%; right: 0;"></i>
+                            <div class="slider-pointer"></div>
+                        {% endif %}
+                    {% else %}
+                        <div class="slider-line">
+                            <img src="/img/product_images/def_product_img.jpeg">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="form_option">
+                {% if product.quantity_in_stock > 0 %}
+                    <form class="add_cart_block" action="{{ route({'name': 'carts-items-create'}) }}">
+                        <p class="product-price">
+                            {% if getUser() %}
+                                {{ product.price }}
+                            {% else %}
+                                {{ product.guest_price }}
+                            {% endif %}
+                            ₴</p>
+                        <input type="hidden" value="{{ product.id }}" id="profile_id" name="product_id">
+                        <input 
+                            type="number" 
+                            name="quantity"
+                            style="text-align: center; width: 100px;" 
+                            value="1" 
+                            min="1"
+                            max="{{ product.quantity_in_stock }}"
+                            id="quantity">
+                        <button type="submit" style="width: auto"><i class="fa-solid fa-cart-plus"></i> Add</button>
+                    </form>
+                {% else %}
+                    <div class="add_cart_block" style="margin-top: 30px;">
+                        <p class="product-price">{{ product.price }} ₴</p>
+                        <h2 style="color: #ccc;">Not available</h2>
+                    </div>
+                {% endif %}
+                
+                
+            </div>
+
+            <div class="form_option">
+            </div>
+
+            <div class="form_option">
+                <h2>Description</h2>
+            </div>
+
+            <div class="form_option">
+                {{ product.description }}
+            </div>
+
+            <div class="form_option">
+            </div>
+        </div>
+	</div>
+{% endblock %}
