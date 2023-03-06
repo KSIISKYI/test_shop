@@ -1,0 +1,33 @@
+{% extends 'admin/index.twig' %}
+
+{% block headers %}
+    {{ parent() }}
+    <script src="/js/lazy_load.js" defer></script>
+    <script src="/js/admin/user.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="main-content" class="container allContent-section py-4">
+        <div>
+            <div style="display: flex; align-items: center; margin-bottom: 20px">
+                <h2 style="margin-right:20px;">Users</h2>
+                <button type="button" class="btn btn-secondary" style="height:40px; width: auto;" onclick="toUserCreationForm()"> 
+                    <i class="fa-solid fa-plus"></i>
+                    Add User
+                </button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Username </th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">IsAdmin</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

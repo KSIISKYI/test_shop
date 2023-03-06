@@ -2,12 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\{Controller, };
-
-class HomeController extends Controller
+class HomeController extends \App\Core\Controller
 {
     public function index()
     {
-        echo 'good';
+        return $this->view->render('home.twig');
     }
 }

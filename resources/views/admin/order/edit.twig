@@ -1,0 +1,141 @@
+{% extends 'admin/index.twig' %}
+
+{% block headers %}
+    {{ parent() }}
+    <script src="/js/admin/order/main.js" defer></script>
+    <script src="/js/admin/order/edit.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="form" style="width: 80%;">
+		    <div class="form_grid">
+                <center><h1>Idit Order</h1></center>
+                <hr>
+                <div class="form_option">
+                    <h2><b>Add Product</b></h2>
+                    <form>
+                        <table class="table" style="margin: 20px 0;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Product Name </th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select class="field_select" name="product_id" id="selected_product" required>
+                                            <option value="">Not Selected</option>
+                                            {% for product in products %}
+                                                <option 
+                                                    quantity="{{ product.quantity_in_stock }}" 
+                                                    price="{{ product.price }}" 
+                                                    product-id="{{ product.id }}">
+                                                        {{ product.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input 
+                                            id="selected_product-price"
+                                            type="text" 
+                                            style="text-align: center; background: none; border: none;" 
+                                            name="price" 
+                                            disapled 
+                                            value="0">
+                                    </td>
+                                    <td>
+                                        <input 
+                                            id="selected_product-quantity"
+                                            type="number" 
+                                            style="text-align: center; min-width: 100px;" 
+                                            placeholder="Enter Quantity" 
+                                            name="quantity" 
+                                            min="1" 
+                                            value="1" 
+                                            required>
+                                    </td>
+                                    <td>
+                                        <button id="add_product_btn" type="submit" style="font-size: 17px; font-weight: bold;">Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+                <hr>
+
+                <div class="form_option">
+                <h2><b>Products</b></h2>
+                    <table class="table" style="margin: 20px 0;" id="order_table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">S.N.</th>
+                                <th class="text-center">Product Name</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <hr>
+
+                <form method="POST" action="{{ route({'name': 'orders-update', 'order_id': order.id}) }}" enctype="multipart/form-data" id="order_form">
+                
+                    <div class="form_grid">
+
+                        <div class="form_option">
+                            <label><b>Shippers</b></label>
+                            <select class="field_select" name="shipper_id" required>
+                                <option value="">Not Selected</option>
+                                    {% for shipper in shippers %}
+                                        <option value="{{ shipper.id }}"
+                                            {% if order.shipper_id == shipper.id %}
+                                                selected
+                                            {% endif %}
+                                        >{{ shipper.company_name }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form_option">
+                            <label><b>Delivery Region</b></label>
+                            <input type="text" placeholder="Enter Delivery Region" name="delivery_region" value="{{ order.delivery_region }}" required>
+                        </div>
+                        
+                        <div class="form_option">
+                            <label><b>Delivery City</b></label>
+                            <input type="text" placeholder="Enter Delivery City" name="delivery_city" value="{{ order.delivery_city }}" required>
+                        </div>
+                        
+                        <div class="form_option">
+                            <label><b>Delivery Address</b></label>
+                            <input type="text" placeholder="Enter Delivery Address" name="delivery_address" value="{{ order.delivery_address }}" required>
+                        </div>
+
+                        <div class="form_option">
+                            <label><b>Postal Code</b></label>
+                            <input type="text" placeholder="Enter Postal Code" name="post_code" value="{{ order.post_code }}" required>
+                        </div>
+
+                        <div class="form_option">
+                            <h2 style="text-align: right; margin-top: 20px;">Total:</h2>
+                            <input type="text" name="total" value="" disabled class="total">
+                        </div>
+
+                        <div class="form_option">
+                            <button id="order_form-btn" type="submit" style="font-size: 17px; font-weight: bold;">Update</button>
+                        </div>
+                    </div>
+                
+                </form>
+            </div>
+    </div>
+{% endblock %}

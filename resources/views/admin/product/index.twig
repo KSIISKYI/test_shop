@@ -1,0 +1,36 @@
+{% extends 'admin/index.twig' %}
+
+{% block headers %}
+    {{ parent() }}
+    <script src="/js/lazy_load.js" defer></script>
+    <script src="/js/admin/product.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div id="main-content" class="container allContent-section py-4">
+        <div>
+            <div style="display: flex; align-items: center; margin-bottom: 20px">
+                <h2 style="margin-right:20px;">Products</h2>
+                <button type="button" class="btn btn-secondary" style="height:40px; width: auto;" onclick="toProductCreationForm()"> 
+                    <i class="fa-solid fa-plus"></i>
+                    Add Product
+                </button>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">S.N.</th>
+                        <th class="text-center">Product Image </th>
+                        <th class="text-center">Product Name</th>
+                        <th class="text-center">Category Name</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity in stock</th>
+                        <th class="text-center" colspan="2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

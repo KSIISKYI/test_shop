@@ -9,6 +9,7 @@ class Request
     public $server = [];
     public $user;
     public $matches;
+    public $cart;
 
     function __construct($user = null)
     {

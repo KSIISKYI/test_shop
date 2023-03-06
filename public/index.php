@@ -1,6 +1,7 @@
 <?php
 
 require_once '../vendor/autoload.php';
+require_once '../app/Core/helpers.php';
 
 use App\Core\{Router, Request};
 
