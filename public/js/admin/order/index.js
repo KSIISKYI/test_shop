@@ -1,18 +1,9 @@
 let tbody = document.querySelector('tbody');
-let current_page_number = 1;
 let current_show_function = showOrdersItems;
+let lazyLoadFunction;
 
-async function showOrdersItems()
+async function showOrdersItems(data)
 {
-    let response = await fetch('http://localhost:8000/orders?page=' + current_page_number, {
-		method: 'GET',
-		headers: {
-			"Content-Type": "application/json",
-		}
-	});
-
-    let data = await response.json();
-
     for(let item of data) {
 
         let order_link = document.createElement('a');
@@ -29,7 +20,7 @@ async function showOrdersItems()
             deleteElement('orders', item['id'], this);
         }
         
-        add_table_row([
+        addTableRow([
             order_link,
             item['user'] ? item['user']['username'] : '',
             item['total'],
@@ -38,8 +29,6 @@ async function showOrdersItems()
             delete_btn
         ])
     }
-
-	current_page_number++;
 }
 
 function toOrderCreationForm()
@@ -49,7 +38,9 @@ function toOrderCreationForm()
 
 async function run()
 {
-    showOrdersItems();
+    lazyLoadFunction = await lazyLoad('/orders');
+
+    lazyLoadFunction();
 }
 
 run();

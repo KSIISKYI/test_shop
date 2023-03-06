@@ -26,11 +26,17 @@ class ProductService
         }
     }
 
-    static public function getProducts()
+    static public function getProducts(Request $request, array $filters = [])
     {
         $product_model = new Product;
 
-        return $product_model->filter();
+        if (isset($_SESSION['user_id'])) {
+            return $product_model->filter($filters); 
+        }
+
+        $filters['for_authorized'] = 0;
+
+        return $product_model->filter($filters);
     }
 
     static public function getProduct($product_id)

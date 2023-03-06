@@ -1,5 +1,7 @@
 <?php
 
+use App\Core\Route;
+
 function route($arr)
 {
     $routes = require '../routes/web.php';
@@ -23,6 +25,15 @@ function route($arr)
 
         return $url_prefix . $route_pattern;
     }
+}
+
+function addMiddleware(array $middleware, Route ...$routes)
+{
+    foreach($routes as $route) {
+        $route->middleware = array_merge($middleware,  $route->middleware);
+    }
+
+    return $routes;
 }
 
 function redirect(string $route)

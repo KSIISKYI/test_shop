@@ -38,6 +38,8 @@ class OrderService
             ProductService::updateQuantity($product->product_id, -$product->quantity);
             self::createOrederItem($new_order['id'], $product->product_id, $product->quantity);
         }
+
+        unset($_SESSION['cart_id']);
     }
 
     static public function updateOrder(Request $request)

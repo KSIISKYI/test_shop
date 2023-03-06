@@ -15,9 +15,21 @@ function checkAndUpdate()
 {
     let len = document.querySelectorAll('tr').length;
 
-    if (length < 11) {
+    if (len < 11) {
         current_show_function();
     }
+}
+
+async function getMyUser()
+{
+    let response = await fetch('/users/my', {
+		method: 'GET',
+		headers: {
+			"Content-Type": "application/json",
+		}
+	});
+
+    return await response.json();
 }
 
 async function deleteElement(type, id, html_element)

@@ -6,7 +6,7 @@ use Twig\Loader\FilesystemLoader;
 use Twig\{Environment, TwigFunction};
 use Twig\Extension\AbstractExtension;
 
-use App\Models\User;
+use App\Models\{User, Category, Cart};
 
 class View
 {
@@ -33,7 +33,9 @@ class AssetExtension extends AbstractExtension
     {
         return [
             new TwigFunction('route', [$this, 'getRoute']),
-            new TwigFunction('getUser', [$this, 'getUser'])
+            new TwigFunction('getUser', [$this, 'getUser']),
+            new TwigFunction('getCategories', [$this, 'getCategories']),
+            new TwigFunction('getCart', [$this, 'getCart']),
         ];
     }
 
@@ -42,10 +44,25 @@ class AssetExtension extends AbstractExtension
         return route($arr);
     }
 
+    function getCategories()
+    {
+        $category_model = new Category;
+
+        return $category_model->filter();
+    }
+
+    function getCart()
+    {
+        $cart_model = new Cart;
+
+        return $cart_model->get('id', $_SESSION['cart_id']);
+    }
+
     function getUser()
     {
         if (isset($_SESSION['user_id'])) {
             $user_model = new User;
+
             return $user_model->get('id', $_SESSION['user_id']);
         }
     }

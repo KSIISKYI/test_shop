@@ -21,7 +21,7 @@
 	<div class="page">
 
 		<div id="header">
-			<div class="logo">TEST SHOP</div>
+			<a href="{{ route({'name': 'home'}) }}"><div class="logo">TEST SHOP</div></a>
 			<div class="header-inner">
 				<div class="header-inner-auth">
                     {% if getUser() %}
@@ -35,18 +35,25 @@
                     {% endif %}
 				</div>
 				<div class="cart-demo">
-					<i class="fa-solid fa-cart-shopping"></i>
-					<div class="amount">2</div>
+					<a href="{{ route({'name': 'carts-show'}) }}"><i class="fa-solid fa-cart-shopping"></i></a>
+						<div class="amount" id="cart_items_count" style="
+							{% if getCart().cart_items %}
+								">{{ getCart().cart_items|length }}</div>
+							{% else %}
+                                display:none;">0</div>
+                            {% endif %}
 				</div>
 			</div>
 		</div>
         {% block nav %}
             <div id="nav">
                 <div class="nav-inner">
-                    <div class="nav-inner-element">All</div>
-                    <div class="nav-inner-element">category1</div>
-                    <div class="nav-inner-element">category2</div>
-                    <div class="nav-inner-element">category3</div>
+                    <a href="{{ route({'name': 'home'}) }}" class="category_link"><div class="nav-inner-element">All categories</div></a>
+					{% for category in getCategories() %}
+						<a class="category_link" href="{{ route({'name': 'products-filter', 'category_id': category.id}) }}">
+							<div class="nav-inner-element">{{ category.name }}</div>
+						</a>
+					{% endfor %}
                 </div>
             </div>
         {% endblock %}

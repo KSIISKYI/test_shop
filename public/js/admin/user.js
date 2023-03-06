@@ -1,18 +1,9 @@
 let tbody = document.querySelector('tbody');
-let current_page_number = 1;
 let current_show_function = showUserItems;
+let lazyLoadFunction;
 
-async function showUserItems()
+async function showUserItems(data)
 {
-    let response = await fetch('http://localhost:8000/users?page=' + current_page_number, {
-		method: 'GET',
-		headers: {
-			"Content-Type": "application/json",
-		}
-	});
-
-    let data = await response.json();
-
     for(let item of data) {
 
         let user_link = document.createElement('a');
@@ -25,7 +16,7 @@ async function showUserItems()
             deleteElement('users', item['id'], this);
         };
         
-        add_table_row([
+        addTableRow([
             item['id'],
             user_link,
             item['email'],
@@ -33,8 +24,6 @@ async function showUserItems()
             item['is_admin'] ? '' : delete_btn,
         ])
     }
-
-	current_page_number++;
 }
 
 function toUserCreationForm()
@@ -44,7 +33,9 @@ function toUserCreationForm()
 
 async function run()
 {
-    showUserItems();
+    lazyLoadFunction = await lazyLoad('/users');
+
+    lazyLoadFunction();
 }
 
 run();

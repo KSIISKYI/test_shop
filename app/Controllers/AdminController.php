@@ -2,11 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Core\{Controller};
 use App\Services\UserService;
-use App\Models\{Category, Product, Cart};
 
-class AdminController extends Controller
+class AdminController extends \App\Core\Controller
 {
     public function index()
     {
